@@ -1,5 +1,5 @@
 const qrcode = require('qrcode-terminal');
-const auth = require("./auth/auth.js")
+const mail = "./modules/mail.js"
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
 const client = new Client({
@@ -39,7 +39,7 @@ client.on('message', msg => {
     }
     if (msg.body = "M 1") {
         msg.reply("Thank You For You Order. The Closest Dispatch Rider Will Contact You With The Details Of Your Order. ")
-
+  
     }else{
 
     client.sendMessage(msg.from, " Hello This Is FSG WORK SOLUTIONS \n  Select THe Options : \n 1) Fsg Agro \n 2) FSG Employments & Oppurtunities   \n 3) Fsg Investment Programs")
