@@ -6,7 +6,7 @@ const client = new Client({
     authStrategy: new LocalAuth()
 });
 
-
+const date = new Date();
 
 client.on('qr', qr => {
     qrcode.generate(qr, { small: true });
@@ -17,16 +17,19 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    
+    const path = './logs/' + msg.id + '.txt'
+
+    if (!fs.existsSync(path)) {
+        fs.writeFileSync(path, date.toLocaleString + " : " + msg.body);
+        console.log(`File ${fileName} created.`);
+    } else {
+        fs.writeFileSync(path, msg.body);
+    }
     console.log("New Message  From "+msg.from+" Body: " + msg.body);
     
-auth.save(msg.body,msg.from,Date.now)
-if (msg.body == "Hello") {
-    client.sendMessage(msg.from, "     Hello This Is FSG WORK SOLUTIONS \n  Select THe Options : \n 1) Fsg Agro \n 2) FSG Employments & Oppurtunities   \n 3) Fsg Investment Programs")
-}else{
-    if (msg.body == "1") {
+    if(msg.body == "1") {
         msg.reply("Select The Option That Suits Your Needs: \n Agro 1) Buy Meat/Chicken \n Agro 2) Buy Household Items \n Agro 3) Foodstuff \n Agro 4) Special Order  \n Note: Special Orders Have A N500 Fee ")
-}
+    }
 
     if (msg.body == "Agro 1") {
 
@@ -37,9 +40,13 @@ if (msg.body == "Hello") {
     if (msg.body = "M 1") {
         msg.reply("Thank You For You Order. The Closest Dispatch Rider Will Contact You With The Details Of Your Order. ")
 
-    }
+    }else{
 
-}
+    client.sendMessage(msg.from, " Hello This Is FSG WORK SOLUTIONS \n  Select THe Options : \n 1) Fsg Agro \n 2) FSG Employments & Oppurtunities   \n 3) Fsg Investment Programs")
+
+    
+
+}}
 
  
 
@@ -49,7 +56,7 @@ if (msg.body == "Hello") {
 
 
 
-});
+);
 
 
 client.initialize();
