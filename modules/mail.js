@@ -10,7 +10,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-function sendmail(email,msg, subject,fmail) {
+export function sendmail(email,msg, subject,fmail) {
     var mailOptions = {
         from: fmail,
         to: email,
@@ -27,6 +27,3 @@ function sendmail(email,msg, subject,fmail) {
     });
 }
 
-module.exports = {
-    sendmail,
-}

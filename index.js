@@ -1,5 +1,6 @@
+const { mutateExecOptions } = require('nodemon/lib/config/load');
 const qrcode = require('qrcode-terminal');
-const mail = "./modules/mail.js"
+const mailss = "./modules/mail.js"
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
 const client = new Client({
@@ -33,13 +34,13 @@ client.on('message', msg => {
 
     if (msg.body == "Agro 1") {
 
-        msg.reply("Select The Size: \n M 1) Meat 1kg \n M 2) Meat 5kg \n C 3) Chicken 1kg \n C 4) Chicken 5kg")
+        msg.reply("Select The Size: \n M 1) Meat 1kg  \n M 2) Meat 5kg \n C 3) Chicken 1kg \n C 4) Chicken 5kg")
 
 
     }
     if (msg.body = "M 1") {
         msg.reply("Thank You For You Order. The Closest Dispatch Rider Will Contact You With The Details Of Your Order. ")
-  
+   mail.sendmail("andrewgbemisola@gmail.com","New Order HAS Been Placed For Meat 1kg At Price n1500 ","New Order","fsgsolutions@gmail.com")
     }else{
 
     client.sendMessage(msg.from, " Hello This Is FSG WORK SOLUTIONS \n  Select THe Options : \n 1) Fsg Agro \n 2) FSG Employments & Oppurtunities   \n 3) Fsg Investment Programs")
