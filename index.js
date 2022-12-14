@@ -1,6 +1,9 @@
 const { mutateExecOptions } = require('nodemon/lib/config/load');
 const qrcode = require('qrcode-terminal');
-const mailss = "./modules/mail.js"
+const mail = require("./modules/mail.js")
+const server = require("./modules/server/server")
+const db = require("./modules/database/mongo")
+
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
 const client = new Client({
@@ -15,6 +18,8 @@ client.on('qr', qr => {
 
 client.on('ready', () => {
     console.log('Client is ready!');
+   server.start()
+
 });
 
 client.on('message', msg => {
