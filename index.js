@@ -2,7 +2,7 @@ const { mutateExecOptions } = require('nodemon/lib/config/load');
 const qrcode = require('qrcode-terminal');
 const mail = require("./modules/mail.js")
 const server = require("./modules/server/server")
-const db = require("./modules/database/mongo")
+const db = require("./modules/database/config")
 
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
