@@ -31,16 +31,30 @@ client.on('message', msg => {
     }else{
         if (msg.body == "Agro 1") {
 
-            msg.reply("Select The Size: \n M1) Meat 1kg  \n M2) Meat 5kg \n C3) Chicken 1kg \n C4) Chicken 5kg")
+            msg.reply("Select The Size: \n M1) Meat 1kg - N1200 \n M2) Meat 5kg -N1500 \n C3) Chicken 1kg - N2000 \n C4) Chicken 5KG -N3000")
 
 
         } else {
             if (msg.body == "M1") {
+
+                const info = ["Meat 1Kg","N1200"]
+                db.savetoDB(info,msg.from)
                 msg.reply("Thank You For You Order. The Closest Dispatch Rider Will Contact You With The Details Of Your Order. ")
-                mail.sendmail("rccgheritageofgod@gmail.com", "New Order HAS Been Placed For Meat 1kg At Price N1500 ", "New Order", "fsgsolutions@gmail.com")
+                mail.sendmail("rccgheritageofgod@gmail.com", "New Order HAS Been Placed For Meat 1kg At Price N1200 ", "New Order", "fsgsolutions@gmail.com")
             } else {
 
+               if (msg.body == "M2") {
+
+                   const info = ["Meat 5Kg", "N1500"]
+                   db.savetoDB(info, msg.from)
+                   msg.reply("Thank You For You Order. The Closest Dispatch Rider Will Contact You With The Details Of Your Order. ")
+                   mail.sendmail("rccgheritageofgod@gmail.com", "New Order HAS Been Placed For Meat 5kg At Price N1500 ", "New Order", "fsgsolutions@gmail.com")
+
+               }else{
+               
+               
                 client.sendMessage(msg.from, " Hello This Is FSG WORK SOLUTIONS \n  Select THe Options : \n 1) Fsg Agro \n 2) FSG Employments & Oppurtunities   \n 3) Fsg Investment Programs")
+               }
             }
 }
         
