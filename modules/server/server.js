@@ -3,12 +3,15 @@ const app = express()
 
 
 exports.start = function start(params) {
-  app.listen(3000, () => {
-   console.log("Application start")
-  })
-
+  
+  console.log("Application start")
 }
 
-
+app.get("/",(req,res)=>{
+  res.send("Ho")
+})
 
     
+app.listen(3000, () => {
+
+})
