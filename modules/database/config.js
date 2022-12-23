@@ -10,6 +10,13 @@ const conn = mysql.createConnection({
 
 
 
+exports.start = function start(params) {
+  
+  console.log("Database start")
+}
+
+
+
 
 exports.savetoDB = (productinfo,from)=>{
 
