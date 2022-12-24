@@ -1,3 +1,6 @@
+const data = require('./data/questions.json');
+
+
 const { mutateExecOptions } = require('nodemon/lib/config/load');
 const qrcode = require('qrcode-terminal');
 const mail = require("./modules/mail.js")
