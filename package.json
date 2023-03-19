@@ -19,7 +19,7 @@
     "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.18.4"
+    "whatsapp-web.js": "^1.19.5"
   },
   "devDependencies": {
     "ws": "3.3.2"
