@@ -15,6 +15,7 @@ let  customorders = false
  let agro = false;
  let  agrosize = false;
  let employment = false;
+ let investment = false;
 
 function processMessage(msg, client) {
   console.log(msg.body, msg.id);
