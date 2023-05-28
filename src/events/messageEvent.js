@@ -39,6 +39,7 @@ function processMessage(msg, client) {
       placeOrder(msg, "Chicken 5Kg", "N3000", client);
       break;
     case "Agro 4":
+        customorders = true;
       handleCustomOrders(msg, client);
       break;
     case "4":
@@ -48,6 +49,11 @@ function processMessage(msg, client) {
       connectToAgent(msg, client);
       break;
     default:
+        if(customorders == true){
+          placeOrder(msg, msg.body, "Store Determined", client);
+          customorders = false;
+          return;
+        }
       sendDefaultResponse(msg, client);
       break;
   }
