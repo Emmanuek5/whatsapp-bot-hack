@@ -21,9 +21,11 @@ server.start();
 db.start();
 const client = new Client({
   authStrategy: new LocalAuth(),
-  puppeteer: {
-    args: ["--no-sandbox"],
-  },
+ puppeteer: {
+    headless: true,
+    args: [
+        '--no-sandbox',
+    ]}
 });
 
 

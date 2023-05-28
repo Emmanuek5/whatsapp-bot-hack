@@ -5,7 +5,7 @@ const los = require("../modules/server/logger.js");
 const file = require("../modules/server/filesystem.js");
 const email = "rccgheritageofgod@gmail.com";
 const { Client, LocalAuth } = require("whatsapp-web.js");
-const number = "+2348146695940";
+const number = "+23470232056338";
 const chatId = number.substring(1) + "@c.us";
 const client = new Client();
 const date = new Date();
@@ -14,33 +14,69 @@ const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
 let  customorders = false
  let agro = false;
  let  agrosize = false;
+ let employment = false;
 
-function processMessage(msg, client) { 
+function processMessage(msg, client) {
   console.log(msg.body, msg.id);
   los.log(msg.body, msg.from);
+
+  if (customorders) {
+    placeOrder(msg, msg.body, ": Store Determined", client);
+    customorders = false;
+    return;
+  }
+
+  if (agro) {
+    switch (msg.body) {
+      case "1":
+        sendAgroOptions(msg);
+        break;
+      case "2":
+        sendHouseholdOptions(msg);
+        break;
+      case "3":
+        sendFoodstuffOptions(msg);
+        break;
+      case "4":
+        customorders = true;
+        handleCustomOrders(msg, client);
+        break;
+      default:
+        sendDefaultResponse(msg, client);
+        break;
+    }
+    agro = false;
+    return;
+  }
+
+  if (employment) {
+    // Handle employment-related options
+    // Add your code here
+    employment = false;
+    return;
+  }
+
+  if (investment) {
+    // Handle investment-related options
+    // Add your code here
+    investment = false;
+    return;
+  }
+
   switch (msg.body) {
     case "1":
-     agro = true;   
+      agro = true;
       sendAgroOptions(msg);
       break;
-    case "Agro 1":
-      sendSizeOptions(msg);
+    case "2":
+      employment = true;
+      // Handle employment-related options
+      // Add your code here
       break;
-    case "M1":
-      placeOrder(msg, "Meat 1Kg", "N1200", client);
-      break;
-    case "M2":
-      placeOrder(msg, "Meat 5Kg", "N1500", client);
-      break;
-    case "C3":
-      placeOrder(msg, "Chicken 1Kg", "N2000", client);
-      break;
-    case "C4":
-      placeOrder(msg, "Chicken 5Kg", "N3000", client);
-      break;
-    case "Agro 4":
-        customorders = true;
-      handleCustomOrders(msg, client);
+    case "3":
+      investment = true;
+      // Handle investment-related options
+      // Add your code here
       break;
     case "4":
       sendSupportMessage(msg, client);
@@ -49,11 +85,6 @@ function processMessage(msg, client) {
       connectToAgent(msg, client);
       break;
     default:
-        if(customorders == true){
-          placeOrder(msg, msg.body, "Store Determined", client);
-          customorders = false;
-          return;
-        }
       sendDefaultResponse(msg, client);
       break;
   }
