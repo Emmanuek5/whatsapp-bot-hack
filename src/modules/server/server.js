@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-
+require("dotenv").config()
 
 exports.start = function start(params) {
   
@@ -12,6 +12,6 @@ app.get("/",(req,res)=>{
 })
 
     
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
 
 })

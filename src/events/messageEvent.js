@@ -77,9 +77,10 @@ function sendSizeOptions(msg) {
 
 async function placeOrder(msg, item, price, client) {
   const info = [item, price];
+  const getnumber = msg.from.replace("@c.us", "");
   await client.sendMessage(
     chatId,
-    `New Order Has Been Placed For ${item} At Price ${price}`
+    `New Order Has Been Placed For ${item} At Price ${price} by: ${getnumber}`
   );
   db.savetoDB(info, msg.from);
   msg.reply(
