@@ -20,12 +20,10 @@ function processMessage(msg, client) {
   los.log(msg.body, msg.from);
   switch (msg.body) {
     case "1":
-if (agro == true) return;
      agro = true;   
       sendAgroOptions(msg);
       break;
-    case "1":
-        if (agro == false) return;
+    case "Agro 1":
       sendSizeOptions(msg);
       break;
     case "M1":
@@ -61,7 +59,7 @@ function handleCustomOrders(msg, client) {
 
 function sendAgroOptions(msg) {
   msg.reply(
-    "Select The Option That Suits Your Needs: \n 1) Buy Meat/Chicken \n Agro 2) Buy Household Items \n Agro 3) Foodstuff \n Agro 4) Custom Order  \n Note: Custom orders like Groundnut oil, Plam Oil etc "
+    "Select The Option That Suits Your Needs: \n Agro 1) Buy Meat/Chicken \n Agro 2) Buy Household Items \n Agro 3) Foodstuff \n Agro 4) Custom Order  \n Note: Custom orders like Groundnut oil, Plam Oil etc "
   );
 }
 
