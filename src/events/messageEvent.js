@@ -7,54 +7,61 @@ const email = "rccgheritageofgod@gmail.com";
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const number = "+2348146695940";
 const chatId = number.substring(1) + "@c.us";
-const client  = new Client()
+const client = new Client();
 const date = new Date();
-const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-console.log(time);
-function processMessage(msg,client) {
-    console.log(msg.body, msg.id);
-    los.log(msg.body,msg.from);
+const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() ;
+ console.log(date.getUTCDate() + "/" + (date.getUTCMonth() + 1) + "/" + date.getUTCFullYear(), time);
+let  customorders = false
+ let agro = false;
+ let  agrosize = false;
+
+function processMessage(msg, client) { 
+  console.log(msg.body, msg.id);
+  los.log(msg.body, msg.from);
   switch (msg.body) {
     case "1":
+if (agro == true) return;
+     agro = true;   
       sendAgroOptions(msg);
       break;
-    case "Agro 1":
+    case "1":
+        if (agro == false) return;
       sendSizeOptions(msg);
       break;
     case "M1":
-      placeOrder(msg, "Meat 1Kg", "N1200",client);
+      placeOrder(msg, "Meat 1Kg", "N1200", client);
       break;
     case "M2":
-      placeOrder(msg, "Meat 5Kg", "N1500",client);
+      placeOrder(msg, "Meat 5Kg", "N1500", client);
       break;
     case "C3":
-      placeOrder(msg, "Chicken 1Kg", "N2000",client);
+      placeOrder(msg, "Chicken 1Kg", "N2000", client);
       break;
     case "C4":
-      placeOrder(msg, "Chicken 5Kg", "N3000",client);
+      placeOrder(msg, "Chicken 5Kg", "N3000", client);
       break;
-     case "Agro 4":
-handleCustomOrders(msg,client)
-     break; 
+    case "Agro 4":
+      handleCustomOrders(msg, client);
+      break;
     case "4":
-      sendSupportMessage(msg,client);
+      sendSupportMessage(msg, client);
       break;
     case "YES":
-      connectToAgent(msg,client);
+      connectToAgent(msg, client);
       break;
     default:
-      sendDefaultResponse(msg,client);
+      sendDefaultResponse(msg, client);
       break;
   }
 }
 
-function handleCustomOrders(msg,client) {
-    
+function handleCustomOrders(msg, client) {
+  client.sendMessage(msg.from, "Enter The Item You Want To Order");
 }
 
 function sendAgroOptions(msg) {
   msg.reply(
-    "Select The Option That Suits Your Needs: \n Agro 1) Buy Meat/Chicken \n Agro 2) Buy Household Items \n Agro 3) Foodstuff \n Agro 4) Custom Order  \n Note: Custom orders like Groundnut oil, Plam Oil etc "
+    "Select The Option That Suits Your Needs: \n 1) Buy Meat/Chicken \n Agro 2) Buy Household Items \n Agro 3) Foodstuff \n Agro 4) Custom Order  \n Note: Custom orders like Groundnut oil, Plam Oil etc "
   );
 }
 
@@ -64,8 +71,12 @@ function sendSizeOptions(msg) {
   );
 }
 
-function placeOrder(msg, item, price, client) {
+async function placeOrder(msg, item, price, client) {
   const info = [item, price];
+  await client.sendMessage(
+    chatId,
+    `New Order Has Been Placed For ${item} At Price ${price}`
+  );
   db.savetoDB(info, msg.from);
   msg.reply(
     "Thank You For Your Order. The Closest Dispatch Rider Will Contact You With The Details Of Your Order."
@@ -75,10 +86,6 @@ function placeOrder(msg, item, price, client) {
     `New Order Has Been Placed For ${item} At Price ${price}`,
     "New Order",
     "fsgsolutions@gmail.com"
-  );
-  client.sendMessage(
-    chatId,
-    `New Order Has Been Placed For ${item} At Price ${price}`
   );
 }
 
